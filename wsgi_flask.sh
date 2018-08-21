@@ -54,4 +54,11 @@ echo "touch $docroot/app.wsgi" > $docroot/touch.sh
 chown $user:$user $docroot/touch.sh
 chmod +x $docroot/touch.sh
 
+echo "For install requirements packs:
+cd $home_dir/$user/web/$domain/private/; source venv/bin/activate; pip install -r $docroot/requirements.txt; deactivate
+
+For reload app:
+touch $docroot/app.wsgi
+" > $docroot/help
+
 exit 0
