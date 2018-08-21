@@ -11,7 +11,7 @@ virtualenv venv
 source venv/bin/activate
 
 pip install flask
-pip install -r $home_dir/$user/web/$domain/private/requirements.txt
+pip install -r $docroot/requirements.txt
 
 deactivate
 
@@ -24,7 +24,7 @@ def hello():
     return 'Hello, Im Flask on VestaCP!'
 if __name__ == '__main__':
     app.run()
-" > $home_dir/$user/web/$domain/private/app.py
+" > $docroot/app.example.py
 
 echo "# Wsgi template
 AddHandler wsgi-script .wsgi
@@ -35,16 +35,23 @@ RewriteCond %{HTTP_HOST} ^www.$2\.ru\$ [NC]
 RewriteRule ^(.*)\$ http://$2/\$1 [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)\$ /flask.wsgi/\$1 [QSA,PT,L]
+RewriteRule ^(.*)\$ /app.wsgi/\$1 [QSA,PT,L]
 " > $docroot/.htaccess
 chown $user:$user $docroot/.htaccess
 
-
 echo "import sys
-sys.path.insert(0, '$home_dir/$user/web/$domain/private/venv/lib/python3.7/site-packages')
-sys.path.insert(0, '$home_dir/$user/web/$domain/private')
 
-from app import app as application" > $docroot/flask.wsgi
-chown $user:$user $docroot/flask.wsgi
+activate_this = '$home_dir/$user/web/$domain/private/venv/bin/activate_this.py'
+with open(activate_this) as file_:
+    exec(file_.read(), dict(__file__=activate_this))
+
+sys.path.insert(0, '$docroot')
+
+from app import app as application" > $docroot/app.wsgi
+chown $user:$user $docroot/app.wsgi
+
+echo "touch $docroot/app.wsgi" > $docroot/touch.sh
+chown $user:$user $docroot/touch.sh
+chmod +x $docroot/touch.sh
 
 exit 0
