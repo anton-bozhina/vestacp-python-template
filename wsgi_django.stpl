@@ -15,6 +15,12 @@
     <Directory %home%/%user%/web/%domain%/stats>
         AllowOverride All
     </Directory>
+    
+    SSLEngine on
+    SSLVerifyClient none
+    SSLCertificateFile %ssl_crt%
+    SSLCertificateKeyFile %ssl_key%
+    %ssl_ca_str%SSLCertificateChainFile %ssl_ca%
 
     <IfModule mod_wsgi.c>
         WSGIScriptReloading On
