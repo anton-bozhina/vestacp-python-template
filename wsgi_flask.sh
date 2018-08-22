@@ -23,10 +23,12 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     return 'Hello, Im Flask on VestaCP!'
+
 if __name__ == '__main__':
     app.run()
 " > $docroot/app.py
 fi
+
 if [ ! -f $docroot/.htaccess ]; then
 echo "# Wsgi template
 AddHandler wsgi-script .wsgi
@@ -41,6 +43,7 @@ RewriteRule ^(.*)\$ /app.wsgi/\$1 [QSA,PT,L]
 " > $docroot/.htaccess
 chown $user:$user $docroot/.htaccess
 fi
+
 if [ ! -f $docroot/app.wsgi ]; then
 echo "import sys
 
