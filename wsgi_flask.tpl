@@ -18,7 +18,7 @@
 
     <IfModule mod_wsgi.c>
         WSGIScriptReloading On
-        WSGIScriptAlias / /home/admin/web/flask.tbot.ga/public_html/app.wsgi
+        WSGIScriptAlias / %docroot%/app.wsgi
         WSGIDaemonProcess %domain%-flask user=%user% group=%user% processes=1 threads=5 display-name=%{GROUP} python-home=%home%/%user%/web/%domain%/private/venv python-path=%docroot%
         WSGIProcessGroup %domain%-flask
         WSGIApplicationGroup %{GLOBAL}
