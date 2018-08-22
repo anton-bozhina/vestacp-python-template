@@ -18,7 +18,7 @@
 
     <IfModule mod_wsgi.c>
         WSGIScriptReloading On
-        WSGIScriptAlias / %docroot%/app/wsgi.py
+        WSGIScriptAlias / %docroot%/app/app.wsgi
         WSGIDaemonProcess %domain%-django user=%user% group=%user% processes=1 threads=5 display-name=%{GROUP} python-home=%home%/%user%/web/%domain%/private/venv python-path=%docroot%
         WSGIProcessGroup %domain%-django
         WSGIApplicationGroup %{GLOBAL}
