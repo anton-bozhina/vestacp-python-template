@@ -15,6 +15,7 @@
     <Directory %home%/%user%/web/%domain%/stats>
         AllowOverride All
     </Directory>
+    
     SSLEngine on
     SSLVerifyClient none
     SSLCertificateFile %ssl_crt%
