@@ -19,7 +19,6 @@ python manage.py startapp samplepage
 
 deactivate
 
-if [ ! -f $docroot/app/wsgi.py ]; then
 echo "import sys
 import os
 
@@ -37,7 +36,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 
 application = get_wsgi_application()" > $docroot/app/wsgi.py
 chown $user:$user $docroot/app/wsgi.py
-fi
 
 if [ ! -f $docroot/.htaccess ]; then
 echo "RewriteEngine On
