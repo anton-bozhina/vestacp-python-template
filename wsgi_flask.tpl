@@ -16,7 +16,7 @@
     </Directory>
 
     <IfModule mod_wsgi.c>
-        WSGIDaemonProcess %domain%-flask user=%user% group=%user% processes=1 threads=5 display-name=%{GROUP} python-path=%home%/%user%/web/%domain%/private/venv/lib/python3.7/site-packages
+        WSGIDaemonProcess %domain%-flask-ssl user=%user% group=%user% processes=1 threads=5 display-name=%{GROUP} python-home=%home%/%user%/web/%domain%/private/venv python-path=%docroot%
         WSGIProcessGroup %domain%-flask
         WSGIApplicationGroup %{GLOBAL}
     </IfModule>
