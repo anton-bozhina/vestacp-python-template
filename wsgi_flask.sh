@@ -27,6 +27,7 @@ def hello():
 if __name__ == '__main__':
     app.run()
 " > $docroot/app.py
+chown $user:$user $docroot/app.py
 fi
 
 if [ ! -f $docroot/.htaccess ]; then
