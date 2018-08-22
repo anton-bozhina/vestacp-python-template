@@ -11,13 +11,14 @@
     CustomLog /var/log/%web_system%/domains/%domain%.bytes bytes
     CustomLog /var/log/%web_system%/domains/%domain%.log combined
     ErrorLog /var/log/%web_system%/domains/%domain%.error.log
+    
     <Directory %home%/%user%/web/%domain%/stats>
         AllowOverride All
     </Directory>
 
     <IfModule mod_wsgi.c>
-	WSGIScriptReloading On
-	      WSGIScriptAlias / %docroot%/app/wsgi.py
+        WSGIScriptReloading On
+        WSGIScriptAlias / %docroot%/app/wsgi.py
         WSGIDaemonProcess %domain%-django user=%user% group=%user% processes=1 threads=5 display-name=%{GROUP} python-home=%home%/%user%/web/%domain%/private/venv python-path=%docroot%
         WSGIProcessGroup %domain%-django
         WSGIApplicationGroup %{GLOBAL}
