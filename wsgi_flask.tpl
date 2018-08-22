@@ -11,12 +11,15 @@
     CustomLog /var/log/%web_system%/domains/%domain%.bytes bytes
     CustomLog /var/log/%web_system%/domains/%domain%.log combined
     ErrorLog /var/log/%web_system%/domains/%domain%.error.log
+
     <Directory %home%/%user%/web/%domain%/stats>
         AllowOverride All
     </Directory>
 
     <IfModule mod_wsgi.c>
-        WSGIDaemonProcess %domain%-flask-ssl user=%user% group=%user% processes=1 threads=5 display-name=%{GROUP} python-home=%home%/%user%/web/%domain%/private/venv python-path=%docroot%
+        WSGIScriptReloading On
+        WSGIScriptAlias / /home/admin/web/flask.tbot.ga/public_html/app.wsgi
+        WSGIDaemonProcess %domain%-flask user=%user% group=%user% processes=1 threads=5 display-name=%{GROUP} python-home=%home%/%user%/web/%domain%/private/venv python-path=%docroot%
         WSGIProcessGroup %domain%-flask
         WSGIApplicationGroup %{GLOBAL}
     </IfModule>
