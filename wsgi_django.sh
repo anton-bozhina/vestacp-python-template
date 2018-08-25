@@ -23,11 +23,6 @@ if [ ! -f $docroot/app/app.wsgi ]; then
 echo "import sys
 import os
 
-activate_this = '$home_dir/$user/web/$domain/private/venv/bin/activate_this.py'
-with open(activate_this) as file_:
-    exec(file_.read(), dict(__file__=activate_this))
-
-sys.path.insert(0, '$docroot')
 sys.path.insert(0, '$docroot/app')
 sys.path.insert(0, '$home_dir/$user/web/$domain/private/venv/lib/python3.7/site-packages')
 
