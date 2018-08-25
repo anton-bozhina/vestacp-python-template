@@ -6,7 +6,7 @@ ip="$3"
 home_dir="$4"
 docroot="$5"
 
-cd $home_dir/$user/web/$domain/private/
+cd $home_dir $docroot/
 virtualenv venv
 source venv/bin/activate
 
@@ -24,7 +24,7 @@ echo "import sys
 import os
 
 sys.path.insert(0, '$docroot/app')
-sys.path.insert(0, '$home_dir/$user/web/$domain/private/venv/lib/python3.7/site-packages')
+sys.path.insert(0, '$docroot/venv/lib/python3.7/site-packages')
 
 from django.core.wsgi import get_wsgi_application
 
@@ -50,7 +50,7 @@ chown $user:$user $docroot/touch.sh
 chmod +x $docroot/touch.sh
 
 echo "For install requirements packs:
-cd $home_dir/$user/web/$domain/private/; source venv/bin/activate; pip install -r $docroot/requirements.txt; deactivate
+cd $docroot/; source venv/bin/activate; pip install -r $docroot/requirements.txt; deactivate
 
 For reload app:
 touch $docroot/app/app.wsgi" > $docroot/help
